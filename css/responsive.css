@@ -1,0 +1,32 @@
+/* RESPONSIVIDADE (MOBILE & TABLET) */
+@media (max-width: 1024px) {
+  .sheet-layout-grid {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+  
+  .sheet-page {
+    overflow-y: visible;
+    height: auto;
+  }
+  
+  body {
+    overflow-y: auto;
+    height: auto;
+  }
+  
+  .main-content {
+    height: auto;
+    overflow-y: visible;
+  }
+  
+  .dice-drawer {
+    width: 100%;
+    transform: translateX(100%);
+  }
+  
+  .dice-drawer.closed {
+    transform: translateX(100%);
+  }
+}
+

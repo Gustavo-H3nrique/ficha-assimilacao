@@ -1,0 +1,576 @@
+/* CHARACTER SHEET SCREEN STYLES - REDESIGN */
+
+#sheet-screen {
+  height: 100%;
+}
+
+.sheet-layout-grid {
+  display: grid;
+  grid-template-columns: 2.2fr 1.1fr;
+  gap: 24px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sheet-pages-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden; /* O contêiner interno gerenciará a rolagem */
+}
+
+/* ==========================================
+   NOVA ESTRUTURA REDESENHADA (DUAS COLUNAS)
+   ========================================== */
+.sheet-redesign-container {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 20px;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* COLUNA ESQUERDA: Status e Perfil */
+.sheet-redesign-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 6px;
+  height: 100%;
+}
+
+/* COLUNA DIREITA: Aptidões e Abas */
+.sheet-redesign-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 6px;
+  height: 100%;
+}
+
+/* ==========================================
+   COMPONENTES DA COLUNA ESQUERDA
+   ========================================== */
+
+/* Card do Perfil (Fundo Preto conforme mockup) */
+.profile-card {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Moldura Polaroid do Retrato */
+.portrait-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row; /* Coloca Polaroid e campos lado a lado */
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+  padding: 10px 0;
+}
+
+.portrait-side-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1; /* Ocupa o espaço restante */
+}
+
+.polaroid-frame {
+  width: 160px;
+  height: 200px;
+  background-color: #ffffff;
+  padding: 10px 10px 28px 10px; /* Borda inferior mais larga clássica */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: visible;
+  cursor: pointer;
+  transform: rotate(-1.5deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
+}
+
+.polaroid-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Fita Adesiva / Crepe (Efeito de fita diagonal) */
+.polaroid-frame::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 50px;
+  height: 18px;
+  background-color: rgba(235, 225, 195, 0.75);
+  transform: rotate(-35deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  border-left: 1px dashed rgba(0, 0, 0, 0.08);
+  border-right: 1px dashed rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+.polaroid-frame::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  right: -14px;
+  width: 55px;
+  height: 18px;
+  background-color: rgba(235, 225, 195, 0.75);
+  transform: rotate(-30deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  border-left: 1px dashed rgba(0, 0, 0, 0.08);
+  border-right: 1px dashed rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+.portrait-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 28px;
+  background: rgba(10, 14, 26, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.polaroid-frame:hover .portrait-overlay {
+  opacity: 1;
+}
+
+.portrait-overlay span {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-official-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid var(--color-official-glow);
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  background: rgba(10, 14, 26, 0.9);
+}
+
+/* Campos de Input do Perfil */
+.profile-fields-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.profile-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.profile-field.full-width {
+  flex: none;
+  width: 100%;
+}
+
+.profile-field label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sheet-input-text {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.sheet-input-text:focus {
+  border-color: var(--color-green-glow);
+  background: rgba(0, 255, 102, 0.02);
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.15);
+}
+
+.input-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Cabo de Guerra e Saúde Cards */
+.cabo-guerra-card, .saude-card {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+}
+
+.cabo-guerra-card {
+  border-color: rgba(0, 255, 102, 0.1);
+}
+
+.saude-card {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.health-formula-info {
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--text-secondary);
+  margin-left: 6px;
+}
+
+/* ==========================================
+   COMPONENTES DE APTIDÕES (COLUNA DIREITA - TOPO)
+   ========================================== */
+.aptitudes-columns-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.aptitude-column-card {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 14px 10px;
+  height: 290px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aptitude-column-header {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 6px;
+  margin-bottom: 2px;
+}
+
+.aptitude-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.aptitude-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: var(--transition-fast);
+  cursor: pointer;
+}
+
+.aptitude-item:hover {
+  background-color: rgba(0, 255, 102, 0.04);
+  border-color: rgba(0, 255, 102, 0.15);
+}
+
+.aptitude-item.selected-for-roll {
+  border-color: var(--color-green-glow);
+  background-color: rgba(0, 255, 102, 0.08);
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.1);
+}
+
+.aptitude-item .name {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ==========================================
+   SISTEMA DE TABS REDESENHADO (COLUNA DIREITA - BASE)
+   ========================================== */
+.sheet-redesign-tabs-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.sheet-redesign-tabs-nav {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 6px 12px 0 12px;
+  z-index: 5;
+  background: rgba(22, 28, 35, 0.4);
+}
+
+.sheet-tab-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+.sheet-tab-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.sheet-tab-btn.active {
+  color: var(--color-green-glow);
+  background-color: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 2px solid var(--bg-main); /* Tampa a linha de baixo */
+  box-shadow: 0 -3px 8px rgba(0, 255, 102, 0.05);
+  margin-bottom: -2px;
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.3);
+}
+
+.sheet-redesign-tabs-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-top: none !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  padding: 16px;
+  background: var(--bg-card);
+}
+
+.sheet-tab-panel {
+  display: none;
+  width: 100%;
+}
+
+.sheet-tab-panel.active {
+  display: block;
+  animation: tabFadeIn 0.2s ease-out;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   AJUSTES INTERNOS DOS PAINÉIS DE ABAS
+   ========================================== */
+
+/* Seção de Características e Mutações */
+.sheet-inner-section {
+  margin-bottom: 20px;
+}
+
+.sheet-inner-section:last-child {
+  margin-bottom: 0;
+}
+
+.sheet-section {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+  border-radius: var(--radius-md);
+  padding: 14px !important;
+  margin-bottom: 16px !important;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-green-glow);
+  border-bottom: 1px solid rgba(0, 255, 102, 0.1);
+  padding-bottom: 4px;
+  margin-bottom: 12px;
+}
+
+/* Inventário Customizado */
+#tab-inventario .inventory-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-height: none;
+  overflow-y: visible;
+}
+
+#tab-inventario .inventory-slot {
+  background-color: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+}
+
+/* Anotações Customizadas */
+.notes-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+.notes-textarea {
+  flex: 1;
+  min-height: 350px !important;
+}
+
+/* Lista Única de Assimilações/Mutações */
+.mutations-sheet-list-single {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 350px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.mutation-sheet-item {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-left: 4px solid #fff;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition-fast);
+}
+
+.mutation-sheet-item:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.mutation-badge {
+  font-family: var(--font-heading);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid currentColor;
+}
+
+/* Cores de Naipes específicos das Mutações */
+.mutation-sheet-item.suit-evolutivas { border-left-color: #f43f5e; }
+.mutation-sheet-item.suit-adaptativas { border-left-color: #eab308; }
+.mutation-sheet-item.suit-inoportunas { border-left-color: #a855f7; }
+.mutation-sheet-item.suit-singulares { border-left-color: #10b981; }
+
+.suit-tag-evolutivas { background-color: rgba(244, 63, 94, 0.12); color: #f43f5e; }
+.suit-tag-adaptativas { background-color: rgba(234, 179, 8, 0.12); color: #eab308; }
+.suit-tag-inoportunas { background-color: rgba(168, 85, 247, 0.12); color: #a855f7; }
+.suit-tag-singulares { background-color: rgba(16, 185, 129, 0.12); color: #10b981; }
+
+/* Botões de Ajuste de Nível do Cabo de Guerra */
+.btn-cabo-adjust {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  padding: 0;
+}
+
+.btn-cabo-adjust:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.det-side .btn-cabo-adjust:hover {
+  border-color: var(--color-rust-glow);
+  color: var(--color-rust-glow);
+  box-shadow: 0 0 6px rgba(255, 157, 71, 0.3);
+}
+
+.ass-side .btn-cabo-adjust:hover {
+  border-color: var(--color-green-glow);
+  color: var(--color-green-glow);
+  box-shadow: 0 0 6px rgba(0, 255, 102, 0.3);
+}
+
+.btn-cabo-points-adjust {
+  transition: var(--transition-fast);
+}
+
+.btn-cabo-points-adjust:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.det-side .btn-cabo-points-adjust:hover {
+  border-color: var(--color-rust-glow) !important;
+  color: var(--color-rust-glow) !important;
+}
+
+.ass-side .btn-cabo-points-adjust:hover {
+  border-color: var(--color-green-glow) !important;
+  color: var(--color-green-glow) !important;
+}
