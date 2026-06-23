@@ -130,11 +130,13 @@ function setupEventListeners() {
   el.btnWizFinish.addEventListener("click", wizardFinish);
   
   // Ficha Auto-save inputs
-  const autoSaveInputs = [el.charName, el.charOcupacao, el.charEvento, el.charPropP1, el.charPropP2, el.charPropCol, el.charNotes];
+  const autoSaveInputs = [el.charName, el.charGeneration, el.charOcupacao, el.charEvento, el.charPropP1, el.charPropP2, el.charPropCol, el.charNotes];
   autoSaveInputs.forEach(input => {
-    input.addEventListener("input", () => {
+    const eventName = input.tagName === "SELECT" ? "change" : "input";
+    input.addEventListener(eventName, () => {
       if (state.currentCharacter) {
         state.currentCharacter.name = el.charName.value || "Sem Nome";
+        state.currentCharacter.generation = el.charGeneration.value;
         state.currentCharacter.ocupacao = el.charOcupacao.value;
         state.currentCharacter.evento = el.charEvento.value;
         state.currentCharacter.propP1 = el.charPropP1.value;
