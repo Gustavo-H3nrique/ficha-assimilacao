@@ -446,30 +446,30 @@ export function toggleKeepDie(index) {
 
 export function getDieFaceImgSrc(sides, value) {
   if (sides === 6) {
-    if (value === 1 || value === 2) return "d6/1 ou 2 (D6).webp";
-    if (value === 3 || value === 4) return "d6/3 ou 4 (D6).webp";
-    if (value === 5) return "d6/5 (D6).webp";
-    if (value === 6) return "d6/6 (D6).webp";
+    if (value === 1 || value === 2) return "assets/d6/1 ou 2 (D6).webp";
+    if (value === 3 || value === 4) return "assets/d6/3 ou 4 (D6).webp";
+    if (value === 5) return "assets/d6/5 (D6).webp";
+    if (value === 6) return "assets/d6/6 (D6).webp";
   } else if (sides === 10) {
-    if (value === 1 || value === 2) return "d10/1 ou 2 (D10).webp";
-    if (value === 3 || value === 4) return "d10/3 ou 4 (D10).webp";
-    if (value === 5) return "d10/5 (D10).webp";
-    if (value === 6) return "d10/6 (D10).webp";
-    if (value === 7) return "d10/7 (D10).webp";
-    if (value === 8) return "d10/8 (D10).webp";
-    if (value === 9) return "d10/9 (D10).webp";
-    if (value === 10) return "d10/10 (D10).webp";
+    if (value === 1 || value === 2) return "assets/d10/1 ou 2 (D10).webp";
+    if (value === 3 || value === 4) return "assets/d10/3 ou 4 (D10).webp";
+    if (value === 5) return "assets/d10/5 (D10).webp";
+    if (value === 6) return "assets/d10/6 (D10).webp";
+    if (value === 7) return "assets/d10/7 (D10).webp";
+    if (value === 8) return "assets/d10/8 (D10).webp";
+    if (value === 9) return "assets/d10/9 (D10).webp";
+    if (value === 10) return "assets/d10/10 (D10).webp";
   } else if (sides === 12) {
-    if (value === 1 || value === 2) return "d12/1 ou 2 (D12).webp";
-    if (value === 3 || value === 4) return "d12/3 ou 4 (D12).webp";
-    if (value === 5) return "d12/5 (D12).webp";
-    if (value === 6) return "d12/6 (D12).webp";
-    if (value === 7) return "d12/7 (D12).webp";
-    if (value === 8) return "d12/8 (D12).webp";
-    if (value === 9) return "d12/9 (D12).webp";
-    if (value === 10) return "d12/10 (D12).webp";
-    if (value === 11) return "d12/11 (D12).webp";
-    if (value === 12) return "d12/12 (D12).webp";
+    if (value === 1 || value === 2) return "assets/d12/1 ou 2 (D12).webp";
+    if (value === 3 || value === 4) return "assets/d12/3 ou 4 (D12).webp";
+    if (value === 5) return "assets/d12/5 (D12).webp";
+    if (value === 6) return "assets/d12/6 (D12).webp";
+    if (value === 7) return "assets/d12/7 (D12).webp";
+    if (value === 8) return "assets/d12/8 (D12).webp";
+    if (value === 9) return "assets/d12/9 (D12).webp";
+    if (value === 10) return "assets/d12/10 (D12).webp";
+    if (value === 11) return "assets/d12/11 (D12).webp";
+    if (value === 12) return "assets/d12/12 (D12).webp";
   }
   return null;
 }

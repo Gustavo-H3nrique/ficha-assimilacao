@@ -666,7 +666,7 @@ export function openMutationSelectionScreen(ptsA, ptsB, ptsC) {
               <div class="tarot-card ${isFlipped ? 'flipped' : ''} ${isSelected ? 'active-selection' : ''}">
                 <!-- Back (face down) -->
                 <div class="tarot-card-face tarot-card-back">
-                  <img src="logoAssimilacao.webp" alt="Assimilação RPG Logo" style="width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #eab308; box-shadow: 0 0 10px rgba(234, 179, 8, 0.45); object-fit: cover; animation: pulse 2s infinite alternate;">
+                  <img src="assets/logoAssimilacao.webp" alt="Assimilação RPG Logo" style="width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #eab308; box-shadow: 0 0 10px rgba(234, 179, 8, 0.45); object-fit: cover; animation: pulse 2s infinite alternate;">
                   <div class="back-text">Destino</div>
                 </div>
                 <!-- Front (face up) -->

@@ -501,7 +501,7 @@ const DICE = (function() {
     function create_custom_d6_materials() {
         var textureLoader = new THREE.TextureLoader();
         function loadTex(path) {
-            var tex = textureLoader.load(path);
+            var tex = textureLoader.load('assets/' + path);
             tex.minFilter = THREE.LinearFilter;
             tex.generateMipmaps = false;
             return tex;
@@ -537,7 +537,7 @@ const DICE = (function() {
     function create_custom_d10_materials() {
         var textureLoader = new THREE.TextureLoader();
         function loadTex(path) {
-            var tex = textureLoader.load(path);
+            var tex = textureLoader.load('assets/' + path);
             tex.minFilter = THREE.LinearFilter;
             tex.generateMipmaps = false;
             return tex;
@@ -607,7 +607,7 @@ const DICE = (function() {
     function create_custom_d12_materials() {
         var textureLoader = new THREE.TextureLoader();
         function loadTex(path) {
-            var tex = textureLoader.load(path);
+            var tex = textureLoader.load('assets/' + path);
             tex.minFilter = THREE.LinearFilter;
             tex.generateMipmaps = false;
             return tex;
