@@ -321,23 +321,25 @@ function setupEventListeners() {
     });
   }
   // XP + / - buttons
-if (btnXpInc) {
-  btnXpInc.addEventListener("click", () => {
-    if (!state.currentCharacter) return;
-    state.currentCharacter.xp = (state.currentCharacter.xp || 0) + 1;
-    document.getElementById("sheet-xp-value").textContent = state.currentCharacter.xp;
-    saveCurrentCharacter();
-  });
-}
-if (btnXpDec) {
-  btnXpDec.addEventListener("click", () => {
-    if (!state.currentCharacter) return;
-    if (state.currentCharacter.xp <= 0) return;
-    state.currentCharacter.xp -= 1;
-    document.getElementById("sheet-xp-value").textContent = state.currentCharacter.xp;
-    saveCurrentCharacter();
-  });
-}
+  const btnXpInc = document.getElementById("btn-xp-inc");
+  const btnXpDec = document.getElementById("btn-xp-dec");
+  if (btnXpInc) {
+    btnXpInc.addEventListener("click", () => {
+      if (!state.currentCharacter) return;
+      state.currentCharacter.xp = (state.currentCharacter.xp || 0) + 1;
+      document.getElementById("sheet-xp-value").textContent = state.currentCharacter.xp;
+      saveCurrentCharacter();
+    });
+  }
+  if (btnXpDec) {
+    btnXpDec.addEventListener("click", () => {
+      if (!state.currentCharacter) return;
+      if (state.currentCharacter.xp <= 0) return;
+      state.currentCharacter.xp -= 1;
+      document.getElementById("sheet-xp-value").textContent = state.currentCharacter.xp;
+      saveCurrentCharacter();
+    });
+  }
 
 
   // Dice Drawer Trigger
