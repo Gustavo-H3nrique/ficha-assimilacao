@@ -215,6 +215,11 @@ export function renderHealthSheet() {
 
   const descEl = row.querySelector("#health-desc");
 if (descEl) descEl.innerHTML = lvlInfo.desc;
+  if (descEl) {
+  descEl.innerHTML = lvlInfo.desc
+    .replace(/SUCESSO/g, `<span style="display:inline-block; width:14px; height:14px; vertical-align:middle; color:#00ff66;">${ICONS.sucesso}</span>`)
+    .replace(/ADAPTACAO/g, `<span style="display:inline-block; width:14px; height:14px; vertical-align:middle; color:#eab308;">${ICONS.adaptacao}</span>`);
+}
 
   const inputHealthTotal = row.querySelector("#input-health-total");
 if (inputHealthTotal) {
