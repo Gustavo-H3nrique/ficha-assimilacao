@@ -62,6 +62,8 @@ export function renderAptitudesSheet() {
       
       bubble.addEventListener("click", (e) => {
         e.stopPropagation(); // Impede selecionar para rolagem
+        const card = e.target.closest(".aptitude-column-card");
+        if (card && card.classList.contains("locked")) return;
         const newValue = val === i ? i - 1 : i;
         // Instintos não podem ser menores que 1 no sistema básico, mas conhecimentos/práticas sim
         updateAptitudeValue("instinto", "instintos", name, Math.max(1, newValue));
@@ -96,6 +98,8 @@ export function renderAptitudesSheet() {
       
       bubble.addEventListener("click", (e) => {
         e.stopPropagation();
+        const card = e.target.closest(".aptitude-column-card");
+        if (card && card.classList.contains("locked")) return;
         const newValue = val === i ? i - 1 : i;
         updateAptitudeValue("skill", "conhecimentos", name, newValue);
       });
@@ -129,6 +133,8 @@ export function renderAptitudesSheet() {
       
       bubble.addEventListener("click", (e) => {
         e.stopPropagation();
+        const card = e.target.closest(".aptitude-column-card");
+        if (card && card.classList.contains("locked")) return;
         const newValue = val === i ? i - 1 : i;
         updateAptitudeValue("skill", "praticas", name, newValue);
       });
@@ -193,15 +199,15 @@ export function renderHealthSheet() {
   row.innerHTML = `
     <div class="health-level-label">
       <div style="display: flex; align-items: center; gap: 8px;">
-        <button class="btn-health-lvl-adjust" id="btn-health-lvl-prev" title="Subir Nível (Curar)" ${activeLvl === 6 ? 'disabled' : ''}>▲</button>
+        <button type="button" class="btn-health-lvl-adjust" id="btn-health-lvl-prev" title="Subir Nível (Curar)" ${activeLvl === 6 ? 'disabled' : ''}>▲</button>
         <span class="name">${lvlInfo.name}</span>
-        <button class="btn-health-lvl-adjust" id="btn-health-lvl-next" title="Descer Nível (Dano)" ${activeLvl === 1 && activeDano === maxPts ? 'disabled' : ''}>▼</button>
+        <button type="button" class="btn-health-lvl-adjust" id="btn-health-lvl-next" title="Descer Nível (Dano)" ${activeLvl === 1 && activeDano === maxPts ? 'disabled' : ''}>▼</button>
       </div>
     </div>
     <div class="health-drops" style="display: flex; align-items: center; gap: 6px;">
-      <button class="btn-health-pts-adjust" id="btn-health-pts-dec" title="Perder Vida (-)" ${activeLvl === 1 && activeDano === maxPts ? 'disabled' : ''}>-</button>
+      <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-dec" title="Perder Vida (-)" ${activeLvl === 1 && activeDano === maxPts ? 'disabled' : ''}>-</button>
       ${dropsHtml}
-      <button class="btn-health-pts-adjust" id="btn-health-pts-inc" title="Ganhar Vida (+)" ${activeLvl === 6 && activeDano === 0 ? 'disabled' : ''}>+</button>
+      <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-inc" title="Ganhar Vida (+)" ${activeLvl === 6 && activeDano === 0 ? 'disabled' : ''}>+</button>
       <input type="text" id="input-health-adjust" class="health-adjust-input" placeholder="±x" title="Digite +1 ou -1 e pressione Enter para alterar a vida">
     </div>
     <span class="desc">${lvlInfo.desc}</span>
@@ -286,6 +292,7 @@ export function renderHealthSheet() {
   const btnNext = row.querySelector("#btn-health-lvl-next");
   
   btnPrev.addEventListener("click", (e) => {
+    e.preventDefault();
     e.stopPropagation();
     if (activeLvl < 6) {
       char.dano[activeLvl] = 0;
@@ -302,6 +309,7 @@ export function renderHealthSheet() {
   });
   
   btnNext.addEventListener("click", (e) => {
+    e.preventDefault();
     e.stopPropagation();
     char.dano[activeLvl] = maxPts;
     if (activeLvl > 1) {
@@ -322,6 +330,7 @@ export function renderHealthSheet() {
 
   if (btnPtsDec) {
     btnPtsDec.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
       const currentDano = char.dano[lvlInfo.key] || 0;
       if (currentDano < maxPts) {
@@ -347,6 +356,7 @@ export function renderHealthSheet() {
 
   if (btnPtsInc) {
     btnPtsInc.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
       const currentDano = char.dano[lvlInfo.key] || 0;
       if (currentDano > 0) {
@@ -494,23 +504,23 @@ export function renderMutationsSheet() {
     if (char.ptsC === undefined) char.ptsC = 2;
     
     pointsContainer.innerHTML = `
-      <div class="ass-point-badge" style="display: flex; align-items: center; background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.2); padding: 3px 8px; border-radius: 4px; font-size: 11px; font-family: var(--font-heading);">
-        <span style="color: #00ff66; margin-right: 6px; font-weight: bold;">Sucesso [A]:</span>
-        <button class="btn-point-adjust dec-a" style="background: none; border: none; color: #00ff66; cursor: pointer; padding: 0 4px; font-weight: bold; font-size: 12px; line-height: 1;">-</button>
-        <span style="color: #00ff66; font-weight: bold; min-width: 14px; text-align: center;">${char.ptsA}</span>
-        <button class="btn-point-adjust inc-a" style="background: none; border: none; color: #00ff66; cursor: pointer; padding: 0 4px; font-weight: bold; font-size: 12px; line-height: 1;">+</button>
+      <div class="ass-point-badge success-badge">
+        <span class="badge-label">Sucesso [A]:</span>
+        <button class="btn-point-adjust dec-a">-</button>
+        <span class="badge-val">${char.ptsA}</span>
+        <button class="btn-point-adjust inc-a">+</button>
       </div>
-      <div class="ass-point-badge" style="display: flex; align-items: center; background: rgba(234, 179, 8, 0.08); border: 1px solid rgba(234, 179, 8, 0.2); padding: 3px 8px; border-radius: 4px; font-size: 11px; font-family: var(--font-heading);">
-        <span style="color: #eab308; margin-right: 6px; font-weight: bold;">Adaptação [B]:</span>
-        <button class="btn-point-adjust dec-b" style="background: none; border: none; color: #eab308; cursor: pointer; padding: 0 4px; font-weight: bold; font-size: 12px; line-height: 1;">-</button>
-        <span style="color: #eab308; font-weight: bold; min-width: 14px; text-align: center;">${char.ptsB}</span>
-        <button class="btn-point-adjust inc-b" style="background: none; border: none; color: #eab308; cursor: pointer; padding: 0 4px; font-weight: bold; font-size: 12px; line-height: 1;">+</button>
+      <div class="ass-point-badge adaptation-badge">
+        <span class="badge-label">Adaptação [B]:</span>
+        <button class="btn-point-adjust dec-b">-</button>
+        <span class="badge-val">${char.ptsB}</span>
+        <button class="btn-point-adjust inc-b">+</button>
       </div>
-      <div class="ass-point-badge" style="display: flex; align-items: center; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); padding: 3px 8px; border-radius: 4px; font-size: 11px; font-family: var(--font-heading);">
-        <span style="color: #ef4444; margin-right: 6px; font-weight: bold;">Pressão [C]:</span>
-        <button class="btn-point-adjust dec-c" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 0 4px; font-weight: bold; font-size: 12px; line-height: 1;">-</button>
-        <span style="color: #ef4444; font-weight: bold; min-width: 14px; text-align: center;">${char.ptsC}</span>
-        <button class="btn-point-adjust inc-c" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 0 4px; font-weight: bold; font-size: 12px; line-height: 1;">+</button>
+      <div class="ass-point-badge pressure-badge">
+        <span class="badge-label">Pressão [C]:</span>
+        <button class="btn-point-adjust dec-c">-</button>
+        <span class="badge-val">${char.ptsC}</span>
+        <button class="btn-point-adjust inc-c">+</button>
       </div>
     `;
     

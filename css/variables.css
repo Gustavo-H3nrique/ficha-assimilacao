@@ -123,6 +123,10 @@ body::before {
   z-index: 10;
 }
 
+.btn-mobile-menu {
+  display: none;
+}
+
 .header-logo {
   font-family: var(--font-heading);
   font-weight: 900;

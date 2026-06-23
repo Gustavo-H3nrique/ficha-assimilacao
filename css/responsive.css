@@ -7,6 +7,10 @@
     height: auto !important;
   }
   
+  body::before {
+    background-image: none !important;
+  }
+  
   .main-content {
     height: auto !important;
     overflow-y: visible !important;
@@ -52,46 +56,99 @@
 @media (max-width: 768px) {
   /* Cabeçalho Responsivo */
   .main-header {
-    flex-direction: column !important;
+    flex-direction: row !important;
     align-items: center !important;
-    gap: 12px !important;
+    justify-content: space-between !important;
     padding: 12px 16px !important;
-    text-align: center;
+    position: relative;
   }
 
   .header-logo {
-    justify-content: center !important;
+    justify-content: flex-start !important;
   }
 
   .header-logo img {
     height: 32px !important;
   }
 
+  /* Hamburguer Menu Button */
+  .btn-mobile-menu {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+  
+  .btn-mobile-menu .menu-bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    transition: var(--transition-fast);
+  }
+
+  .btn-mobile-menu.active .menu-bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .btn-mobile-menu.active .menu-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .btn-mobile-menu.active .menu-bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Drawer Sidebar for controls */
   .header-controls {
+    position: fixed !important;
+    top: 0 !important;
+    right: -280px !important;
+    width: 260px !important;
+    height: 100vh !important;
+    background-color: rgba(22, 28, 35, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-left: 2px solid var(--color-blue-glow) !important;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.8) !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding: 80px 20px 20px 20px !important;
+    gap: 20px !important;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 1000 !important;
+  }
+
+  .header-controls.active {
+    right: 0 !important;
+  }
+
+  /* Override internal items styles inside drawer */
+  .header-controls .selector-container {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+  
+  .header-controls #char-selector {
+    width: 100% !important;
+  }
+
+  .header-controls .btn {
     width: 100% !important;
     justify-content: center !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
   }
 
-  .selector-container {
-    width: 100% !important;
-    justify-content: center !important;
+  .header-controls .btn-text {
+    display: inline !important;
   }
 
-  #char-selector {
-    flex-grow: 1 !important;
-    max-width: none !important;
-  }
 
-  /* Ocultar texto nos botões do cabeçalho */
-  .btn-text {
-    display: none !important;
-  }
-
-   .btn {
-    padding: 8px 12px !important;
-  }
 
   /* Botão flutuante (FAB) do rolador de dados no mobile */
   #btn-open-roller {
@@ -121,6 +178,10 @@
     font-size: 1.8em !important;
   }
 
+  #btn-open-roller .btn-text {
+    display: none !important;
+  }
+  
   /* Grades da Ficha */
   .status-cards-row {
     grid-template-columns: 1fr !important;
@@ -416,14 +477,41 @@
     grid-template-columns: 1fr !important;
     gap: 10px !important;
   }
+
+  .sheet-section-header {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .instinto-panel-content-flex {
+    grid-template-columns: 1fr !important;
+  }
+
+  .tarot-spread {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding: 10px 20px !important;
+    gap: 16px !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
+  }
+
+  .tarot-card-wrapper {
+    flex: 0 0 120px !important;
+    scroll-snap-align: center !important;
+  }
 }
 
 /* CELULARES PORTRAIT (Largura até 480px) */
 @media (max-width: 480px) {
   .portrait-wrapper {
-    flex-direction: column !important;
     align-items: center !important;
-    gap: 16px !important;
+    gap: 8x !important;
   }
 
   .portrait-side-fields {

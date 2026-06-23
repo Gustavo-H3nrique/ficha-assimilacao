@@ -878,6 +878,16 @@ export function openMutationSelectionScreen(ptsA, ptsB, ptsC) {
     renderMutationsSheet();
     el.modalContainer.classList.add("hidden");
   });
+
+  // Mantém a carta selecionada no centro do carrossel ao remontar o DOM
+  if (state.activeCardIndex !== null && state.activeCardIndex !== undefined) {
+    setTimeout(() => {
+      const activeCardEl = document.querySelector(`.tarot-card-wrapper[data-index="${state.activeCardIndex}"]`);
+      if (activeCardEl) {
+        activeCardEl.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
+    }, 50);
+  }
 }
 
 export function openSettingsModal() {

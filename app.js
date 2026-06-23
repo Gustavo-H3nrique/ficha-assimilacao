@@ -1,7 +1,7 @@
 import { el, state, loadCharactersFromStorage, saveCurrentCharacter, loadCharacter, deleteActiveCharacter, exportActiveCharacter, importCharacterFile } from "./js/state.js";
-import { startWizard, wizardPrevStep, wizardNextStep, wizardFinish } from "./js/wizard.js";
+import { startWizard, wizardPrevStep, wizardNextStep, wizardFinish, renderWizardTraits } from "./js/wizard.js";
 import { updateDiceDrawerUI, execute3DPhysicsRoll, executeCustomRoll, setupNumberInputControls, updateKeepCountDisplay, initRolagemAssimiladaPanel } from "./js/roller.js";
-import { openTraitsModal, openAssimilationTestModal, openSettingsModal } from "./js/modals.js";
+import { openTraitsModal, openAssimilationTestModal, openSettingsModal, openMutationSelectionScreen } from "./js/modals.js";
 import { renderAptitudesSheet, adjustCaboGuerraLevels, executeAssimilacaoAvanco, renderCaboGuerraSheet } from "./js/sheet.js";
 import { ICONS } from "./icons.js";
 import { logger } from "./js/logger.js";
@@ -71,6 +71,58 @@ function setupEventListeners() {
   el.btnExportJson.addEventListener("click", exportActiveCharacter);
   el.btnImportJson.addEventListener("click", () => el.fileImport.click());
   el.fileImport.addEventListener("change", importCharacterFile);
+
+  // Mobile Menu Toggling
+  if (el.btnMobileMenu && el.headerControls) {
+    el.btnMobileMenu.addEventListener("click", (e) => {
+      e.stopPropagation();
+      el.btnMobileMenu.classList.toggle("active");
+      el.headerControls.classList.toggle("active");
+    });
+
+    // Close sidebar when clicking outside of it
+    document.addEventListener("click", (e) => {
+      if (el.headerControls.classList.contains("active")) {
+        if (!el.headerControls.contains(e.target) && !el.btnMobileMenu.contains(e.target)) {
+          el.btnMobileMenu.classList.remove("active");
+          el.headerControls.classList.remove("active");
+        }
+      }
+    });
+
+    // Close sidebar when a control inside it is clicked (e.g. character selector or button)
+    el.headerControls.addEventListener("click", (e) => {
+      if (e.target.closest("button") || (e.target.closest("select") && e.type === "change")) {
+        el.btnMobileMenu.classList.remove("active");
+        el.headerControls.classList.remove("active");
+      }
+    });
+
+    // Handle change on character selector specifically to close sidebar
+    el.charSelector.addEventListener("change", () => {
+      el.btnMobileMenu.classList.remove("active");
+      el.headerControls.classList.remove("active");
+    });
+  }
+
+  // Aptitude Columns Lock Toggles
+  document.querySelectorAll(".btn-lock-toggle").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const card = e.target.closest(".aptitude-column-card");
+      if (card) {
+        const isLocked = card.classList.toggle("locked");
+        const iconSpan = btn.querySelector("[data-icon]");
+        if (iconSpan) {
+          iconSpan.setAttribute("data-icon", isLocked ? "lock" : "unlock");
+          // Re-render icon
+          const iconName = iconSpan.getAttribute("data-icon");
+          if (ICONS[iconName]) {
+            iconSpan.innerHTML = ICONS[iconName];
+          }
+        }
+      }
+    });
+  });
   
   // Wizard Navigation
   el.btnWizPrev.addEventListener("click", wizardPrevStep);
@@ -187,6 +239,28 @@ function setupEventListeners() {
   // Add Trait from Sheet
   el.btnAddTraitSheet.addEventListener("click", openTraitsModal);
   el.btnAssimilationTest.addEventListener("click", openAssimilationTestModal);
+
+  const btnOpenTarotAgain = document.getElementById("btn-open-tarot-again");
+  if (btnOpenTarotAgain) {
+    btnOpenTarotAgain.addEventListener("click", () => {
+      const char = state.currentCharacter;
+      if (!char) return;
+      
+      // Verifica se possui pontos pendentes
+      const ptsA = char.ptsA || 0;
+      const ptsB = char.ptsB || 0;
+      const ptsC = char.ptsC || 0;
+      
+      if (ptsA === 0 && ptsB === 0 && ptsC === 0) {
+        alert("Você não possui pontos de Sucesso [A], Adaptação [B] ou Pressão [C] pendentes para realizar a leitura do Tarot!");
+        return;
+      }
+      
+      // Reseta o cache de cartas sorteadas para forçar uma nova tiragem
+      state.drawnMutationCards = null;
+      openMutationSelectionScreen(ptsA, ptsB, ptsC);
+    });
+  }
 
   // Cabo de Guerra Adjustments
   if (el.btnDecDet) el.btnDecDet.addEventListener("click", () => adjustCaboGuerraLevels(-1));
@@ -388,6 +462,32 @@ function setupEventListeners() {
       });
     });
   });
+
+  // Navegação de Abas do Assistente de Criação (XP Inicial / Passo 8)
+  const xpTabButtons = document.querySelectorAll(".xp-tab-btn");
+  const xpTabContents = document.querySelectorAll(".xp-tab-content");
+  xpTabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetTab = btn.getAttribute("data-tab");
+      
+      xpTabButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      
+      xpTabContents.forEach(panel => {
+        if (panel.id === targetTab) {
+          panel.classList.add("active");
+        } else {
+          panel.classList.remove("active");
+        }
+      });
+    });
+  });
+
+  // Filtro de Custo de Características do Wizard
+  const wizTraitsCostFilter = document.getElementById("wiz-traits-cost-filter");
+  if (wizTraitsCostFilter) {
+    wizTraitsCostFilter.addEventListener("change", renderWizardTraits);
+  }
 
   // Clique na moldura do retrato para abrir selecionador de arquivo
   if (el.portraitFrame && el.portraitInput) {

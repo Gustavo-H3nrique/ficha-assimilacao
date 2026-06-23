@@ -33,7 +33,7 @@ export function startWizard() {
   document.getElementById("wiz-prop-p1").value = "";
   document.getElementById("wiz-prop-p2").value = "";
   document.getElementById("wiz-prop-col").value = "";
-  document.getElementById("wiz-det-slider").value = 9;
+  document.getElementById("wiz-det-slider").value = 1;
   
   el.wizardScreen.classList.remove("hidden");
   el.sheetScreen.classList.add("hidden");
@@ -142,9 +142,9 @@ export function validateWizardStep(step) {
   }
 
   if (step === 6) {
-    const det = parseInt(document.getElementById("wiz-det-slider").value);
-    state.wizardData.detNivel = det;
-    state.wizardData.assNivel = 10 - det;
+    const ass = parseInt(document.getElementById("wiz-det-slider").value);
+    state.wizardData.assNivel = ass;
+    state.wizardData.detNivel = 10 - ass;
   }
   
   if (step === 8) {
@@ -271,11 +271,11 @@ export function updateWizardCaboValues() {
   const assVal = document.getElementById("wiz-ass-val");
   
   const handleInput = () => {
-    const det = parseInt(slider.value);
-    detVal.textContent = det;
-    assVal.textContent = 10 - det;
-    state.wizardData.detNivel = det;
-    state.wizardData.assNivel = 10 - det;
+    const ass = parseInt(slider.value);
+    assVal.textContent = ass;
+    detVal.textContent = 10 - ass;
+    state.wizardData.assNivel = ass;
+    state.wizardData.detNivel = 10 - ass;
   };
   
   slider.removeEventListener("input", handleInput);

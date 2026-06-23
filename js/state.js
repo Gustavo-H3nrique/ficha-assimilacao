@@ -22,6 +22,8 @@ export const el = {
   btnDeleteChar: document.getElementById("btn-delete-char"),
   btnOpenRoller: document.getElementById("btn-open-roller"),
   btnSettings: document.getElementById("btn-settings"),
+  btnMobileMenu: document.getElementById("btn-mobile-menu"),
+  headerControls: document.querySelector(".header-controls"),
   
   // Wizard Navigation
   btnWizPrev: document.getElementById("btn-wiz-prev"),

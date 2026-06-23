@@ -112,7 +112,7 @@
 .health-drop {
   width: 24px;
   height: 30px;
-  color: rgba(0, 0, 0, 0.15);
+  color: rgb(161 161 161 / 60%);
   cursor: pointer;
   transition: var(--transition-fast);
 }

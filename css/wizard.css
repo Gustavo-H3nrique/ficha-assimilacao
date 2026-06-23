@@ -230,46 +230,74 @@
 /* Cabo de Guerra Slider */
 .cabo-config-container {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   margin: 32px 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.cabo-slider-box {
+.cabo-label-side {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  flex: 0 0 140px;
 }
 
-.cabo-slider-box label {
+.cabo-label-side .label-title {
   font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: var(--font-size-lg);
+  font-weight: bold;
+  font-size: var(--font-size-xs);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
 }
 
-input[type="range"] {
+.cabo-label-side .label-value {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: var(--font-size-huge);
+}
+
+.det-side-label {
+  color: var(--color-rust-glow);
+}
+
+.ass-side-label {
+  color: var(--color-blue-glow);
+}
+
+.cabo-slider-center {
+  flex: 1;
+}
+
+#wiz-det-slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(0, 0, 0, 0.1);
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--color-rust-glow), var(--color-blue-glow)) !important;
   outline: none;
 }
 
-input[type="range"]::-webkit-slider-thumb {
+#wiz-det-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: var(--color-blue-glow);
+  background: #fff;
+  border: 2px solid var(--color-official-cyan-dark);
   cursor: pointer;
-  box-shadow: var(--glow-shadow);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), var(--glow-shadow);
   transition: var(--transition-fast);
 }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+#wiz-det-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 1);
 }
 
 .alert-info-box {

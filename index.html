@@ -20,6 +20,12 @@
       <img src="assets/logotipoAssimilacao.webp" alt="Assimilação RPG Logo" style="height: 40px; width: auto; max-width: 100%;">
     </div>
     
+    <button id="btn-mobile-menu" type="button" class="btn-mobile-menu" title="Abrir Menu">
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+    </button>
+    
       <div class="header-controls">
         <div class="selector-container">
           <label for="char-selector">Personagem:</label>
@@ -38,6 +44,12 @@
       <input type="file" id="file-import" accept=".json" style="display: none;">
       <button id="btn-export-json" class="btn btn-secondary export-json" title="Exportar Ficha JSON" disabled>
         <span class="btn-icon" data-icon="export"></span> <span class="btn-text">Exportar</span>
+      </button>
+      <button id="btn-assimilation-test" class="btn btn-primary" title="Realizar Teste de Assimilação">
+        <span class="btn-icon" data-icon="assimilation_point"></span> <span class="btn-text">Teste de Assimilação</span>
+      </button>
+      <button id="btn-open-tarot-again" class="btn btn-secondary" title="Refazer Leitura (Tarot)">
+        <span class="btn-icon" data-icon="ouros"></span> <span class="btn-text">Refazer Tarot</span>
       </button>
       <button id="btn-delete-char" class="btn btn-danger" title="Apagar Personagem" disabled>
         <span class="btn-icon" data-icon="trash"></span>
@@ -150,12 +162,16 @@
           <h3>Passo 6: Cabo de Guerra Inicial</h3>
           <p class="step-help">Determina o equilíbrio inicial entre sua mente humana e o parasita (Soma sempre 10).</p>
           <div class="cabo-config-container">
-            <div class="cabo-slider-box">
-              <label for="wiz-det-slider">Nível de Determinação: <span id="wiz-det-val">9</span></label>
-              <input type="range" id="wiz-det-slider" min="1" max="9" value="9" step="1">
+            <div class="cabo-label-side det-side-label">
+              <span class="label-title">DETERMINAÇÃO</span>
+              <span id="wiz-det-val" class="label-value">9</span>
             </div>
-            <div class="cabo-slider-box">
-              <label>Nível de Assimilação: <span id="wiz-ass-val">1</span></label>
+            <div class="cabo-slider-center">
+              <input type="range" id="wiz-det-slider" min="1" max="9" value="1" step="1">
+            </div>
+            <div class="cabo-label-side ass-side-label">
+              <span class="label-title">ASSIMILAÇÃO</span>
+              <span id="wiz-ass-val" class="label-value">1</span>
             </div>
           </div>
           <div class="alert-info-box">
@@ -385,22 +401,37 @@
               <!-- APTIDÕES (TRÊS COLUNAS PARALELAS) -->
               <div class="aptitudes-columns-container">
                 <!-- INSTINTOS -->
-                <div class="aptitude-column-card card-glass">
-                  <h3 class="aptitude-column-header instintos-header">INSTINTOS</h3>
+                <div class="aptitude-column-card card-glass locked">
+                  <h3 class="aptitude-column-header instintos-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>INSTINTOS</span>
+                    <button class="btn-lock-toggle" title="Desbloquear Edição" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:4px;">
+                      <span data-icon="lock" style="width:16px; height:16px; display:inline-block;"></span>
+                    </button>
+                  </h3>
                   <div class="aptitude-list instintos-list" id="instincts-list-sheet">
                     <!-- JS insere instintos -->
                   </div>
                 </div>
                  <!-- CONHECIMENTOS -->
-                <div class="aptitude-column-card card-glass">
-                  <h3 class="aptitude-column-header conhecimentos-header">CONHECIMENTOS</h3>
+                <div class="aptitude-column-card card-glass locked">
+                  <h3 class="aptitude-column-header conhecimentos-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>CONHECIMENTOS</span>
+                    <button class="btn-lock-toggle" title="Desbloquear Edição" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:4px;">
+                      <span data-icon="lock" style="width:16px; height:16px; display:inline-block;"></span>
+                    </button>
+                  </h3>
                   <div class="aptitude-list conhecimentos-list" id="conhecimentos-list-sheet">
                     <!-- JS insere conhecimentos -->
                   </div>
                 </div>
                 <!-- PRÁTICAS -->
-                <div class="aptitude-column-card card-glass">
-                  <h3 class="aptitude-column-header praticas-header">PRÁTICAS</h3>
+                <div class="aptitude-column-card card-glass locked">
+                  <h3 class="aptitude-column-header praticas-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>PRÁTICAS</span>
+                    <button class="btn-lock-toggle" title="Desbloquear Edição" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:4px;">
+                      <span data-icon="lock" style="width:16px; height:16px; display:inline-block;"></span>
+                    </button>
+                  </h3>
                   <div class="aptitude-list praticas-list" id="praticas-list-sheet">
                     <!-- JS insere práticas -->
                   </div>
@@ -438,8 +469,8 @@
                   <div class="sheet-tab-panel active" id="tab-mutacoes">
                     <!-- Seção de Características Adquiridas -->
                     <div class="sheet-section section-traits">
-                      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px; margin-bottom: 12px;">
-                        <h3 class="section-title" style="margin: 0; border: none; padding: 0;">CARACTERÍSTICAS</h3>
+                      <div class="sheet-section-header">
+                        <h3 class="section-title section-title-clean">CARACTERÍSTICAS</h3>
                         <div style="display: flex; gap: 8px; align-items: center;">
                           <div class="xp-counter" style="margin: 0; font-size: var(--font-size-xs); font-family: var(--font-heading);">XP: <strong id="sheet-xp-value">0</strong></div>
                           <button id="btn-add-trait-sheet" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-weight: bold; font-size: 14px; line-height: 1; border-radius: 4px;" title="Adicionar Característica (XP)">+</button>
@@ -455,17 +486,12 @@
                   <div class="sheet-tab-panel" id="tab-assimilacoes">
                     <!-- Seção de Assimilações -->
                     <div class="sheet-section section-assimilations">
-                      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px; margin-bottom: 12px;">
-                        <h3 class="section-title" style="margin: 0; border: none; padding: 0;">ASSIMILAÇÕES (MUTAÇÕES)</h3>
-                        <div id="sheet-assimilation-points" style="display: flex; gap: 8px; align-items: center;"></div>
+                      <div class="sheet-section-header">
+                        <h3 class="section-title section-title-clean">ASSIMILAÇÕES (MUTAÇÕES)</h3>
+                        <div id="sheet-assimilation-points" class="assimilation-points-container"></div>
                       </div>
                       <div class="mutations-sheet-list-single" id="mutations-list-sheet">
                         <!-- Mutações inseridas pelo JS em uma única coluna -->
-                      </div>
-                      <div class="assimilation-actions">
-                        <button id="btn-assimilation-test" class="btn btn-primary btn-sm">
-                          Realizar Teste de Assimilação
-                        </button>
                       </div>
                     </div>
                   </div>
