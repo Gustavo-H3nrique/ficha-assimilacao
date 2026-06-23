@@ -132,6 +132,10 @@ export function openTraitsModal() {
 export function checkCharacterTraitPrerequisites(char, reqs) {
   if (!reqs) return true;
   for (const [key, value] of Object.entries(reqs)) {
+    if (key === "Assimilação") {
+  if ((char.assNivel || 0) < value) return false;
+  continue;
+}
     if (key === "criacao") return false;
     if (key === "or") {
       const options = reqs.or;
