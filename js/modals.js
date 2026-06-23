@@ -132,25 +132,24 @@ export function openTraitsModal() {
 export function checkCharacterTraitPrerequisites(char, reqs) {
   if (!reqs) return true;
   for (const [key, value] of Object.entries(reqs)) {
-    if (key === "criacao") return false; // Bloqueia característica exclusiva de criação na ficha
+    if (key === "criacao") return false;
     if (key === "or") {
       const options = reqs.or;
       const targetVal = reqs.val || 1;
       let ok = false;
       options.forEach(opt => {
-        const val = char.conhecimentos[opt] !== undefined ? char.conhecimentos[opt] : (char.praticas[opt] || 0);
+        const val = char.instintos[opt] !== undefined ? char.instintos[opt] : (char.conhecimentos[opt] !== undefined ? char.conhecimentos[opt] : (char.praticas[opt] || 0));
         if (val >= targetVal) ok = true;
       });
       if (!ok) return false;
       continue;
     }
     if (key === "val") continue;
-    
     if (char.instintos[key] !== undefined) {
       if (char.instintos[key] < value) return false;
     } else {
       const val = char.conhecimentos[key] !== undefined ? char.conhecimentos[key] : (char.praticas[key] || 0);
-      if (val < value) return false;
+      if (isNaN(value) || val < value) return false;
     }
   }
   return true;
