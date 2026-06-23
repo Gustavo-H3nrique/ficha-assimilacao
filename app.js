@@ -320,6 +320,30 @@ function setupEventListeners() {
       }
     });
   }
+  // XP Math Input
+const inputXpMath = document.getElementById("input-xp-math");
+if (inputXpMath) {
+  inputXpMath.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      if (!state.currentCharacter) return;
+      const valueStr = inputXpMath.value.trim();
+      if (!valueStr) return;
+      let delta = 0;
+      if (valueStr.startsWith("+")) {
+        delta = parseInt(valueStr.slice(1).trim(), 10);
+      } else if (valueStr.startsWith("-")) {
+        delta = parseInt(valueStr.trim(), 10);
+      } else {
+        delta = parseInt(valueStr, 10);
+      }
+      if (isNaN(delta)) return;
+      state.currentCharacter.xp = Math.max(0, state.currentCharacter.xp + delta);
+      el.sheetXpValue.textContent = state.currentCharacter.xp;
+      saveCurrentCharacter();
+      inputXpMath.value = "";
+    }
+  });
+}
 
 
   // Dice Drawer Trigger
