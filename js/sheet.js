@@ -212,7 +212,15 @@ export function renderHealthSheet() {
     </div>
     <span class="desc">${lvlInfo.desc}</span>
   `;
-  
+
+  const inputHealthTotal = row.querySelector("#input-health-total");
+  if (inputHealthTotal) {
+    inputHealthTotal.value = char.healthNote || "";
+    inputHealthTotal.addEventListener("input", () => {
+      char.healthNote = inputHealthTotal.value;
+      saveCurrentCharacter();
+    });
+  }
   
   row.querySelectorAll(".health-drop").forEach(drop => {
     drop.addEventListener("click", () => {
