@@ -208,7 +208,7 @@ export function renderHealthSheet() {
       <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-dec" title="Perder Vida (-)" ${activeLvl === 1 && activeDano === maxPts ? 'disabled' : ''}>-</button>
       ${dropsHtml}
       <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-inc" title="Ganhar Vida (+)" ${activeLvl === 6 && activeDano === 0 ? 'disabled' : ''}>+</button>
-      <input type="text" id="input-health-total" class="health-adjust-input" placeholder="HP total" title="Saúde total do personagem" style="width: 60px; text-align: center;">
+      <input type="text" id="input-health-total" class="health-adjust-input" placeholder="HP total" title="Saúde total do personagem" style="width: 60px; text-align: center;" value="${char.healthNote || ''}">
     </div>
     <span class="desc">${lvlInfo.desc}</span>
   `;
