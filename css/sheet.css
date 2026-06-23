@@ -239,6 +239,19 @@
   background: rgba(0, 0, 0, 0.03);
 }
 
+#char-generation {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#char-generation option {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
 .input-stacked {
   display: flex;
   flex-direction: column;
