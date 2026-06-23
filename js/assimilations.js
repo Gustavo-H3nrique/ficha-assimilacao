@@ -499,11 +499,119 @@ export const ASSIMILACOES = {
     cartas: [
       {
         carta: "Ás de Paus",
-        nome: "Assimilação Vegetativa",
+        nome: "Assimilação do Bosque",
         mutações: [
-          { cost: "1 singular", name: "Fotossíntese", desc: "Recupera 1 Ponto de Determinação ao repousar sob luz solar direta, sem precisar de água/comida naquele dia." },
-          { cost: "2 singulares", name: "Mimetismo Florestal", desc: "Ganha um Sucesso em testes de Furtividade quando em matas ou florestas." },
-          { cost: "3 singulares", name: "Espinhos Protetores", desc: "Inimigos que atacam você desarmados sofrem 1 ponto de dano s." }
+          { cost: "1 adptação e 1 sucesso", name: "Embaúba", desc: "A cada hora imóvel com os pés ou mãos em contato direto com vegetação viva ou solo úmido, entra em estado de simbiose e Regenera um ponto de Saúde. Dobra todo dano sofrido nesse período. Sofrer dano interrompe o efeito." },
+          { cost: "1 sucesso e 1 pressão", name: "Eucalyptus", desc: "Se for reduzido ao Nível de Saúde 1 ou 2, pode optar por permanecer imóvel por 6 horas em contato com solo fértil para habilitar sua Recuperação como se estivesse no Nível de Saúde 3. Se for interrompido durante o processo, qualquer teste de Medicina para viabilizar a Recuperação recebe Pressão adicional no resultado." },
+          { cost: "1 adptação e 1 pressão", name: "Araucária", desc: "Se passar mais de 24 horas sem contato direto com vegetação viva ou solo fértil, sofre uma penalidade de Sucesso em todo teste que inclua Sobrevivência até restabelecer esse contato por pelo menos 1 hora." }
+        ]
+      },
+      {
+        carta: "2 de Paus",
+        nome: "Assimilação da Campina",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Alecrim", desc: "Durante o dia, enquanto estiver exposto à luz solar direta por pelo menos 1 hora, pode gastar um Ponto de Determinação para dispensar a necessidade de alimentação e água por 24 horas. Esse efeito não se acumula e é anulado por ambientes sem luz natural (interiores, subsolo ou neblina densa)." },
+          { cost: "1 sucesso e 1 pressão", name: "Cágado", desc: "A epiderme se torna parcialmente transparente para otimizar a absorção solar. Enquanto exposto ao sol, Recupera um ponto de Saúde por cena automaticamente. Contudo, sofre 1 ponto adicional de dano de ataques baseados em calor ou luz intensa (como fogo, laser ou clarões bioluminescentes)." },
+          { cost: "1 adptação e 1 pressão", name: "Maria-da-campina", desc: "A pele fotossintética não tolera bem a ausência de luz natural. A cada dia passado sem exposição direta ao sol (ou fonte equivalente), sofre uma penalidade de Sucesso em testes de Resolução até que a exposição seja restabelecida por ao menos 1 hora." }
+        ]
+      },
+      {
+        carta: "3 de Paus",
+        nome: "Assimilação do Cerrado",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Tatu-canastra", desc: "Enquanto estiver sob sol forte ou clima seco, recebe um ponto de dano a menos de ataques físicos. Esse bônus se perde se estiver em clima úmido, submerso ou sob chuva intensa." },
+          { cost: "1 sucesso e 1 pressão", name: "Mandacaru", desc: "Sempre que sofrer dois ou mais pontos de dano em um mesmo ataque, a camada externa de sua carapaça se fragmenta em estilhaços, ferindo quem estiver em alcance corpo a corpo. O atacante sofre um ponto de dano direto, mas você também sofre uma penalidade de Sucesso em testes de Reação até a carapaça regenerar (o que só ocorre após o fim da cena)." },
+          { cost: "1 adptação e 1 pressão", name: "Lobo-guará", desc: "Sua anatomia reage mal à umidade. Sempre que entrar em contato prolongado com água (chuva intensa, submersão, clima encharcado), sofre uma penalidade de Sucesso em testes que incluam Potência ou Furtividade até se secar completamente." }
+        ]
+      },
+      {
+        carta: "4 de Paus",
+        nome: "Assimilação da Colina",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Caxinguelê", desc: "Ignora penalidades por terreno inclinado, escorregadio ou irregular durante deslocamentos e escaladas. Sempre que investir Sucesso em Fuga, adicione um Sucesso adicional. Além disso, não pode ser derrubado ou desequilibrado por meios físicos, a menos que o ataque cause dano." },
+          { cost: "1 sucesso e 1 pressão", name: "Porco-do-mato", desc: "Recebe Sucesso adicional em testes que incluam Atletismo ao correr, saltar ou escalar, mas sofre a penalidade de Pressão adicional em testes que incluam Furtividade devido à rigidez dos movimentos." },
+          { cost: "1 adptação e 1 pressão", name: "Jabuti-piranga", desc: "Em ambientes planos ou excessivamente nivelados (ambientes urbanos, corredores, pisos industriais), sofre menos Sucesso em testes que incluam Reação até deixar o local ou se adaptar por uma cena inteira." }
+        ]
+      },
+      {
+        carta: "5 de Paus",
+        nome: "Assimilação Desértica",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Suculenta", desc: "Pode permanecer até 5 dias sem consumir água sem sofrer penalidades." },
+          { cost: "1 sucesso e 1 pressão", name: "Diabo-espinhoso", desc: "O corpo libera secreções que irritam olhos e mucosas. Agressores corpo a corpo sofrem 1 ponto de dano ou Sucesso adicional em neutralização da Ameaça. Toda Pressão mantida pelo resto da cena causa 1 ponto de dano a um aliado próximo." },
+          { cost: "1 adptação e 1 pressão", name: "Esquilo Terrestre", desc: "Passa a cavar buracos para dormir em segurança, perde um Ponto de Determinação se não dormir em uma toca." }
+        ]
+      },
+      {
+        carta: "6 de Paus",
+        nome: "Assimilação Florestal",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Morcego-narigudo", desc: "Passa a ignorar penalidades por baixa luminosidade natural, incluindo crepúsculo, sombra densa ou penumbra. Esse efeito não se aplica à escuridão total nem à ausência de luz artificial." },
+          { cost: "1 sucesso e 1 pressão", name: "Sucuri", desc: "Os sons são absorvidos pela pele. Recebe Adaptação adicional em testes que incluem Furtividade ao se mover em vegetação densa, mas sofre Pressão em testes que incluem Expressão, pois a vocalização se torna abafada e pouco audível." },
+          { cost: "1 adptação e 1 pressão", name: "Rato-do-mato", desc: "Ao sair abruptamente de ambiente sombreado para um muito iluminado, sofre uma penalidade de Sucesso em testes que incluem Percepção por 1 cena, devido à saturação do nervo óptico." }
+        ]
+      },
+      {
+        carta: "7 de Paus",
+        nome: "Assimilação do Manguezal",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Mangue-vermelho", desc: "Pode consumir água salobra ou salina sem qualquer prejuízo." },
+          { cost: "1 sucesso e 1 pressão", name: "Caramujo-do-mangue", desc: "Consegue respirar parcialmente pela pele em ambientes alagadiços, permanecendo submerso por até 10 minutos. No entanto, a pele torna-se vulnerável, sofrendo um ponto de dano adicional contra ataques físicos." },
+          { cost: "1 adptação e 1 pressão", name: "Sururu", desc: "Ao passar mais de 6 horas em ambientes secos (ambiente urbano, cerrado, alta montanha), a pele começa a rachar. Sofre uma penalidade de Sucesso em testes que incluam Reação até ser reidratado por imersão ou umidade ambiental." }
+        ]
+      },
+      {
+        carta: "8 de Paus",
+        nome: "Assimilação Marinha",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Toninha", desc: "Você se move duas vezes mais rápido na água do que um humano comum, e não precisa testar Atletismo para nadar, exceto em tempestades ou redemoinhos. Dobre todos os Sucessos investidos em Fuga nadando." },
+          { cost: "1 sucesso e 1 pressão", name: "Biguá", desc: "Tem Sucesso adicional em testes que incluem Atletismo na água ou areia fofa, e adiciona Pressão em testes que incluem Manufaturas, pois a motricidade fina dos dedos foi comprometida." },
+          { cost: "1 adptação e 1 pressão", name: "Tartaruga-aruanã", desc: "Sempre que estiver correndo ou saltando em pisos rígidos (metal, concreto, pedra), sofre Pressão em testes que incluem Potência, devido ao formato instável das extremidades." }
+        ]
+      },
+      {
+        carta: "9 de Paus",
+        nome: "Assimilação da Montanha",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Urubu-Rei", desc: "Não sofre qualquer penalidade por altitudes elevadas ou ar rarefeito, mesmo acima de 3000m. Pode manter esforço físico moderado por mais tempo sem fadiga." },
+          { cost: "1 sucesso e 1 pressão", name: "Calango-bandeira", desc: "Pode prender a respiração por até 10 minutos mesmo em movimento, mas em climas quentes e secos perde Adaptação em testes de Influência ou Expressão, devido à rouquidão." },
+          { cost: "1 adptação e 1 pressão", name: "Tucanuçu", desc: "Ao passar mais de 1 hora em ambientes abafados ou com alta umidade, tem a Sagacidade reduzida em um (mínimo 0), como se estivesse em constante mal-estar leve." }
+        ]
+      },
+      {
+        carta: "10 de Paus",
+        nome: "Assimilação do Pântano",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Guaiamu", desc: "Ignora penalidades de movimento em terrenos encharcados ou instáveis. Pode atravessar até 2 metros de profundidade de água ou lama sem necessidade de teste." },
+          { cost: "1 sucesso e 1 pressão", name: "Garça-azul", desc: "Possui Sucesso adicional em testes que incluem Furtividade ao caminhar sobre lama ou folhas alagadas, pois seus passos não fazem barulho. Contudo, sofre Pressão adicional em testes que incluam Reação em ambientes fechados, onde o alongamento das pernas prejudica o equilíbrio." },
+          { cost: "1 adptação e 1 pressão", name: "Sapo-cururu", desc: "Se for derrubado ou sofrer queda, deve fazer um teste de Potência ou irá sofrer um ponto de dano adicional de todos os ataques até o fim da cena, por instabilidade nas articulações." }
+        ]
+      },
+      {
+        carta: "Valete de Paus",
+        nome: "Assimilação da Caatinga",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Rola-bosta", desc: "Reduz em um ponto todo dano cortante ou perfurante sofrido por fontes naturais (espinhos, facas, garras). Esse efeito não se aplica a armas de fogo ou ataques energéticos." },
+          { cost: "1 sucesso e 1 pressão", name: "Asa-branca", desc: "A pele protege contra insolação e exposição solar extrema por até 2 cenas, mesmo sem abrigo ou água. Tem Influência reduzida em um (mínimo 0), devido à aparência enrijecida e aspecto vítreo." },
+          { cost: "1 adptação e 1 pressão", name: "Teiú", desc: "Em ambientes úmidos ou com pouca circulação de ar, acumula calor corporal, sofrendo uma penalidade de Sucesso em testes que incluam Reação após 2 horas." }
+        ]
+      },
+      {
+        carta: "Dama de Paus",
+        nome: "Assimilação Subterrânea",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Tatu-canastra", desc: "Detecta movimentos ou presenças num raio de 10 metros se estiver tocando o chão com as mãos ou pés descalços, mesmo na escuridão. Não identifica outros detalhes, somente a intensidade e a distância." },
+          { cost: "1 sucesso e 1 pressão", name: "Coruja-buraqueira", desc: "Recebe Sucesso adicional em testes que incluem Percepção para identificar sons abafados ou ecos subterrâneos, mas sofre Pressão adicional em testes que incluam Reação relacionados a ruídos altos repentinos (tiros, explosões), por conta do sistema sensível à pressão sonora." },
+          { cost: "1 adptação e 1 pressão", name: "Morcego-de-cauda-livre", desc: "Ambientes com múltiplos sons sobrepostos (máquinas, motores, grandes multidões) sobrecarregam o(a) Infectado(a). Tem a Sagacidade reduzida em um (mínimo 0) nesses locais até que se isole." }
+        ]
+      },
+      {
+        carta: "Rei de Paus",
+        nome: "Assimilação da Tundra",
+        mutações: [
+          { cost: "1 adptação e 1 sucesso", name: "Líquen-de-mapa", desc: "Não sofre penalidades por frio intenso ou neve, mesmo abaixo de –20°C. Pode dormir ao relento sem risco de congelamento ou exaustão térmica." },
+          { cost: "1 sucesso e 1 pressão", name: "Marmota-alpina", desc: "Pode entrar voluntariamente em estado de torpor por até 12 horas, reduzindo consumo de oxigênio e estabilizando ferimentos (não morre por sangramento nesse estado). Contudo, ao sair do torpor, a Potência é reduzida em um (mínimo 0) até o próximo descanso." },
+          { cost: "1 adptação e 1 pressão", name: "Husky siberiano", desc: "Os pelos de todo o corpo crescem muito formando uma proteção contra o frio. Em ambientes quentes sofre Pressão adicional em testes que incluam Atletismo." }
         ]
       }
     ]
