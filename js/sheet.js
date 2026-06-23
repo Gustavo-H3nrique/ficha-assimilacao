@@ -208,53 +208,11 @@ export function renderHealthSheet() {
       <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-dec" title="Perder Vida (-)" ${activeLvl === 1 && activeDano === maxPts ? 'disabled' : ''}>-</button>
       ${dropsHtml}
       <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-inc" title="Ganhar Vida (+)" ${activeLvl === 6 && activeDano === 0 ? 'disabled' : ''}>+</button>
-      <input type="text" id="input-health-adjust" class="health-adjust-input" placeholder="±x" title="Digite +1 ou -1 e pressione Enter para alterar a vida">
+      <input type="text" id="input-health-total" class="health-adjust-input" placeholder="HP total" title="Saúde total do personagem" style="width: 60px; text-align: center;">
     </div>
     <span class="desc">${lvlInfo.desc}</span>
   `;
   
-  const inputAdjust = row.querySelector("#input-health-adjust");
-  if (inputAdjust) {
-    inputAdjust.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        const valStr = inputAdjust.value.trim();
-        const value = parseInt(valStr);
-        if (!isNaN(value) && value !== 0) {
-          const totalHealth = activeLvl * maxPts - activeDano;
-          const newTotalHealth = Math.max(0, Math.min(6 * maxPts, totalHealth + value));
-          
-          if (newTotalHealth === 0) {
-            for (let lvl = 1; lvl <= 6; lvl++) {
-              char.dano[lvl] = maxPts;
-            }
-          } else {
-            const L = Math.ceil(newTotalHealth / maxPts);
-            for (let lvl = 1; lvl <= 6; lvl++) {
-              if (lvl > L) {
-                char.dano[lvl] = maxPts;
-              } else if (lvl < L) {
-                char.dano[lvl] = 0;
-              } else {
-                char.dano[lvl] = L * maxPts - newTotalHealth;
-              }
-            }
-          }
-          
-          saveCurrentCharacter();
-          renderHealthSheet();
-          
-          try {
-            updateDiceDrawerUI();
-          } catch (err) {
-            logger.error("Erro ao atualizar pós-ajuste de vida por input:", err);
-          }
-        } else {
-          inputAdjust.value = "";
-        }
-      }
-    });
-  }
   
   row.querySelectorAll(".health-drop").forEach(drop => {
     drop.addEventListener("click", () => {
