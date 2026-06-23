@@ -214,13 +214,10 @@ export function renderHealthSheet() {
   `;
 
   const inputHealthTotal = row.querySelector("#input-health-total");
-  if (inputHealthTotal) {
-    inputHealthTotal.value = char.healthNote || "";
-    inputHealthTotal.addEventListener("input", () => {
-      char.healthNote = inputHealthTotal.value;
-      saveCurrentCharacter();
-    });
-  }
+if (inputHealthTotal) {
+  const totalHealth = activeLvl * maxPts - activeDano;
+  inputHealthTotal.value = totalHealth;
+}
   
   row.querySelectorAll(".health-drop").forEach(drop => {
     drop.addEventListener("click", () => {
