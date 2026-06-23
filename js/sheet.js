@@ -210,8 +210,11 @@ export function renderHealthSheet() {
       <button type="button" class="btn-health-pts-adjust" id="btn-health-pts-inc" title="Ganhar Vida (+)" ${activeLvl === 6 && activeDano === 0 ? 'disabled' : ''}>+</button>
       <input type="text" id="input-health-total" class="health-adjust-input" placeholder="HP total" title="Saúde total do personagem" style="width: 60px; text-align: center;" value="${char.healthNote || ''}">
     </div>
-    <span class="desc">${lvlInfo.desc}</span>
+    <span class="desc" id="health-desc"></span>
   `;
+
+  const descEl = row.querySelector("#health-desc");
+if (descEl) descEl.innerHTML = lvlInfo.desc;
 
   const inputHealthTotal = row.querySelector("#input-health-total");
 if (inputHealthTotal) {
