@@ -167,10 +167,10 @@ export function renderHealthSheet() {
   const levels = [
   { key: "6", name: "6. Saudável", desc: "Plenamente funcional, sem modificadores" },
   { key: "5", name: "5. Escoriação", desc: "Plenamente funcional, sem modificadores" },
-  { key: "4", name: "4. Laceração", desc: `Penalidade de -1 <span style="display:inline-block; width:14px; height:14px; vertical-align:middle;">${ICONS.sucesso}</span> em todos os testes` },
-  { key: "3", name: "3. Ferimentos", desc: `Penalidade de -1 <span style="display:inline-block; width:14px; height:14px; vertical-align:middle;">${ICONS.sucesso}</span> em todos os testes` },
-  { key: "2", name: "2. Debilitação", desc: `Penalidade de -2 <span style="display:inline-block; width:14px; height:14px; vertical-align:middle;">${ICONS.sucesso}</span>. Incapaz de agir sem gastar 1 Determinação` },
-  { key: "1", name: "1. Incapacitação", desc: `Coma. Gasta 1 Determinação/rodada para falar. Ação: +2 <span style="display:inline-block; width:14px; height:14px; vertical-align:middle;">${ICONS.adaptacao}</span>` }
+  { key: "4", name: "4. Laceração", desc: "Penalidade de -1 ★ em todos os testes" },
+  { key: "3", name: "3. Ferimentos", desc: "Penalidade de -1 ★ em todos os testes" },
+  { key: "2", name: "2. Debilitação", desc: "Penalidade de -2 ★. Incapaz de agir sem gastar 1 Determinação" },
+  { key: "1", name: "1. Incapacitação", desc: "Coma. Gasta 1 Determinação/rodada para falar. Ação: +2 ✦" }
 ];
   
   if (!char.dano) {
