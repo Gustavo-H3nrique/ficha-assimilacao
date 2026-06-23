@@ -718,7 +718,7 @@ export function adjustCaboGuerraLevels(changeDet) {
   if (!char) return;
   
   const newDet = char.detNivel + changeDet;
-  if (newDet >= 1 && newDet <= 9) {
+  if (newDet >= 1 && newDet <= 10) {
     char.detNivel = newDet;
     char.assNivel = 10 - newDet;
     
