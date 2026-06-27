@@ -426,12 +426,10 @@ function setupEventListeners() {
 
   // Modificadores de Rolagem
   el.modEmpenho.addEventListener("change", updateKeepCountDisplay);
-  el.modOrigemOcupacao.addEventListener("change", updateKeepCountDisplay);
-  el.modOrigemEvento.addEventListener("change", updateKeepCountDisplay);
+
   
   if (el.modEmpenhoAss) el.modEmpenhoAss.addEventListener("change", initRolagemAssimiladaPanel);
-  if (el.modOrigemOcupacaoAss) el.modOrigemOcupacaoAss.addEventListener("change", initRolagemAssimiladaPanel);
-  if (el.modOrigemEventoAss) el.modOrigemEventoAss.addEventListener("change", initRolagemAssimiladaPanel);
+  
   
   // Alternar abas do Rolador (Normal vs Assimilada)
   const tabRollerNormal = document.getElementById("tab-roller-normal");
