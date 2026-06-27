@@ -497,6 +497,37 @@ export function setupNumberInputControls() {
     }
   });
 
+  // Controles manuais para d12 (Assimilados) - FORA do forEach
+  document.querySelectorAll(".dice-select-control").forEach(control => {
+    const tag = control.querySelector(".tag-d12");
+    if (!tag) return;
+    
+    const minus = control.querySelector(".num-minus");
+    const plus = control.querySelector(".num-plus");
+    
+    if (minus) {
+      minus.addEventListener("click", () => {
+        let val = parseInt(el.diceQtyD12.textContent) || 0;
+        if (val > 0) {
+          el.diceQtyD12.textContent = val - 1;
+          triggerSelectedRollUpdate();
+          updateDiceDrawerUI();
+        }
+      });
+    }
+    
+    if (plus) {
+      plus.addEventListener("click", () => {
+        let val = parseInt(el.diceQtyD12.textContent) || 0;
+        if (val < 10) {
+          el.diceQtyD12.textContent = val + 1;
+          triggerSelectedRollUpdate();
+          updateDiceDrawerUI();
+        }
+      });
+    }
+  });
+
   setupDiceTagSelectionControls();
 }
 
