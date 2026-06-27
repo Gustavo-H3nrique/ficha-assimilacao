@@ -567,15 +567,15 @@
 }
 
 /* Cores de Naipes específicos das Mutações */
-.mutation-sheet-item.suit-evolutivas { border-left-color: #f43f5e; }
+.mutation-sheet-item.suit-evolutivas { border-left-color: #00ff66; }
 .mutation-sheet-item.suit-adaptativas { border-left-color: #eab308; }
-.mutation-sheet-item.suit-inoportunas { border-left-color: #a855f7; }
-.mutation-sheet-item.suit-singulares { border-left-color: #10b981; }
+.mutation-sheet-item.suit-inoportunas { border-left-color: #ef4444; }
+.mutation-sheet-item.suit-singulares { border-left-color: #a855f7; }
 
-.suit-tag-evolutivas { background-color: rgba(244, 63, 94, 0.12); color: #f43f5e; }
+.suit-tag-evolutivas { background-color: rgba(244, 63, 94, 0.12); color: #00ff66; }
 .suit-tag-adaptativas { background-color: rgba(234, 179, 8, 0.12); color: #eab308; }
-.suit-tag-inoportunas { background-color: rgba(168, 85, 247, 0.12); color: #a855f7; }
-.suit-tag-singulares { background-color: rgba(16, 185, 129, 0.12); color: #10b981; }
+.suit-tag-inoportunas { background-color: rgba(168, 85, 247, 0.12); color: #ef4444; }
+.suit-tag-singulares { background-color: rgba(16, 185, 129, 0.12); color: #a855f7; }
 
 /* Botões de Ajuste de Nível do Cabo de Guerra */
 .btn-cabo-adjust {
