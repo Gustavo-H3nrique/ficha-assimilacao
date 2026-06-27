@@ -349,10 +349,11 @@ function setupEventListeners() {
 
   // Botão "Lançar Dados" no cabeçalho abre o modal do rolador
   if (el.btnOpenRoller) {
-    el.btnOpenRoller.addEventListener("click", () => {
-      if (el.diceDrawer) el.diceDrawer.classList.remove("hidden");
-    });
-  }
+  el.btnOpenRoller.addEventListener("click", () => {
+    if (el.diceDrawer) el.diceDrawer.classList.remove("hidden");
+    updateDiceDrawerUI();
+  });
+}
 
   // Novo botão de fechar (X) dentro do modal do rolador
   const btnCloseDrawer = document.getElementById("btn-close-drawer");
