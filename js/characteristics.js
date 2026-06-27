@@ -320,7 +320,7 @@ export const CARACTERISTICAS = [
     custo: 3,
     requisitoText: "Medicina 2+",
     requisitos: { Medicina: 2 },
-    descricao: "Sempre que realizar jogadas que visem cuidar de ferimentos Ponto de Determinação doenças, adiciona um Sucesso em seu resultado."
+    descricao: "Sempre que realizar jogadas que tenha como objetivo auxiliar nos cuidados de ferimentos e doenças, adiciona um Sucesso em seu resultado."
   },
   {
     id: "racional",
