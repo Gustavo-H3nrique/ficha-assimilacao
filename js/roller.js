@@ -184,8 +184,7 @@ export function resetDiceDrawerSelections() {
   el.diceQtyD12.textContent = 0;
   el.currentRollLabel.textContent = "Nenhuma aptidão selecionada na ficha";
   el.modEmpenho.checked = false;
-  el.modOrigemOcupacao.checked = false;
-  el.modOrigemEvento.checked = false;
+  
 
   if (el.rollSelectInstinto) el.rollSelectInstinto.value = "";
   if (el.rollSelectSkill) el.rollSelectSkill.value = "";
@@ -200,8 +199,7 @@ export function resetDiceDrawerSelections() {
 export function updateKeepCountDisplay() {
   let maxKeep = 1; // Base
   if (el.modEmpenho.checked) maxKeep++;
-  if (el.modOrigemOcupacao.checked) maxKeep++;
-  if (el.modOrigemEvento.checked) maxKeep++;
+  
   
   // Obter o maxKeepCount da gaveta ou da mensagem ativa
   const maxKeepCountDrawer = document.getElementById("max-keep-count");
@@ -629,8 +627,6 @@ export function initRolagemAssimiladaPanel() {
 
     let maxKeep = 2;
     if (el.modEmpenhoAss && el.modEmpenhoAss.checked) maxKeep++;
-    if (el.modOrigemOcupacaoAss && el.modOrigemOcupacaoAss.checked) maxKeep++;
-    if (el.modOrigemEventoAss && el.modOrigemEventoAss.checked) maxKeep++;
     if (keepLabel) keepLabel.textContent = maxKeep;
   }
 
@@ -691,8 +687,7 @@ export function initRolagemAssimiladaPanel() {
         
         let maxKeep = 2;
         if (el.modEmpenhoAss && el.modEmpenhoAss.checked) maxKeep++;
-        if (el.modOrigemOcupacaoAss && el.modOrigemOcupacaoAss.checked) maxKeep++;
-        if (el.modOrigemEventoAss && el.modOrigemEventoAss.checked) maxKeep++;
+        
 
         const keptIndexes = [...results.map((d, i) => ({ ...d, i }))]
           .sort((a, b) => b.value - a.value).slice(0, maxKeep).map(d => d.i);
@@ -769,8 +764,7 @@ export function initRolagemAssimiladaPanel() {
         }));
         let maxKeep = 2;
         if (el.modEmpenhoAss && el.modEmpenhoAss.checked) maxKeep++;
-        if (el.modOrigemOcupacaoAss && el.modOrigemOcupacaoAss.checked) maxKeep++;
-        if (el.modOrigemEventoAss && el.modOrigemEventoAss.checked) maxKeep++;
+        
 
         const keptIndexes = [...results.map((d, i) => ({ ...d, i }))]
           .sort((a, b) => b.value - a.value).slice(0, maxKeep).map(d => d.i);
