@@ -85,8 +85,51 @@ export function updateDiceDrawerUI() {
   el.diceQtyD10.textContent = state.selectedRoll.d10;
   el.diceQtyD12.textContent = state.selectedRoll.d12;
   
-  if (el.rollSelectInstinto) el.rollSelectInstinto.value = state.selectedRoll.instinto;
-  if (el.rollSelectSkill) el.rollSelectSkill.value = state.selectedRoll.skill;
+  // Atualiza o select de Instintos com os valores do personagem
+if (el.rollSelectInstinto && state.currentCharacter) {
+  const char = state.currentCharacter;
+  const currentInstinto = state.selectedRoll.instinto;
+  el.rollSelectInstinto.innerHTML = `<option value="">-- Nenhum --</option>`;
+  Object.keys(char.instintos).forEach(name => {
+    const val = char.instintos[name];
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = `${name} (${val})`;
+    if (name === currentInstinto) opt.selected = true;
+    el.rollSelectInstinto.appendChild(opt);
+  });
+}
+
+// Atualiza o select de Conhecimentos/Práticas com os valores do personagem
+if (el.rollSelectSkill && state.currentCharacter) {
+  const char = state.currentCharacter;
+  const currentSkill = state.selectedRoll.skill;
+  el.rollSelectSkill.innerHTML = `<option value="">-- Nenhum --</option>`;
+
+  const grpCon = document.createElement("optgroup");
+  grpCon.label = "Conhecimentos";
+  Object.keys(char.conhecimentos).forEach(name => {
+    const val = char.conhecimentos[name];
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = `${name} (${val})`;
+    if (name === currentSkill) opt.selected = true;
+    grpCon.appendChild(opt);
+  });
+  el.rollSelectSkill.appendChild(grpCon);
+
+  const grpPra = document.createElement("optgroup");
+  grpPra.label = "Práticas";
+  Object.keys(char.praticas).forEach(name => {
+    const val = char.praticas[name];
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = `${name} (${val})`;
+    if (name === currentSkill) opt.selected = true;
+    grpPra.appendChild(opt);
+  });
+  el.rollSelectSkill.appendChild(grpPra);
+}
   
   if (state.selectedRoll.instinto || state.selectedRoll.skill) {
     const instText = state.selectedRoll.instinto ? `${state.selectedRoll.instinto} (${state.currentCharacter.instintos[state.selectedRoll.instinto]})` : "Nenhum Instinto";
