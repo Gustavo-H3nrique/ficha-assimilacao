@@ -25,8 +25,6 @@ export function appendRollToChat(formula) {
   
   let maxKeep = 1;
   if (el.modEmpenho.checked) maxKeep++;
-  if (el.modOrigemOcupacao.checked) maxKeep++;
-  if (el.modOrigemEvento.checked) maxKeep++;
   if (state.selectedRoll.agirPorInstinto) maxKeep++;
   
   const rollEntry = {
