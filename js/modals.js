@@ -512,20 +512,37 @@ export function openMutationSelectionScreen(ptsA, ptsB, ptsC) {
         border: 1px solid rgba(255,255,255,0.05);
         margin-top: 6px;
       }
-      .tarot-spread {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        margin: 20px 0;
-        perspective: 1000px;
-        width: 100%;
-        flex-wrap: wrap;
+      .tarot-carousel-group {
+       width: 100%;
+       margin-bottom: 20px;
       }
-      .tarot-card-wrapper {
-        width: 120px;
-        height: 190px;
-        cursor: pointer;
-      }
+.tarot-carousel-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 4px;
+}
+.tarot-spread {
+  display: flex;
+  gap: 16px;
+  padding: 10px 0;
+  perspective: 1000px;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blue-glow) rgba(0,0,0,0.3);
+}
+.tarot-card-wrapper {
+  width: 120px;
+  height: 190px;
+  cursor: pointer;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+}
       .tarot-card {
         width: 100%;
         height: 100%;
@@ -657,32 +674,47 @@ export function openMutationSelectionScreen(ptsA, ptsB, ptsC) {
         </div>
       </div>
 
-      <div class="tarot-spread">
-        ${state.drawnMutationCards.map((item, idx) => {
-          const type = item.category;
-          const isFlipped = item.flipped;
-          const isSelected = state.activeCardIndex === idx;
-          const symbol = type === "evolutivas" ? "♥" : type === "adaptativas" ? "♦" : type === "inoportunas" ? "♠" : "♣";
-          
-          return `
-            <div class="tarot-card-wrapper" data-index="${idx}">
-              <div class="tarot-card ${isFlipped ? 'flipped' : ''} ${isSelected ? 'active-selection' : ''}">
-                <!-- Back (face down) -->
-                <div class="tarot-card-face tarot-card-back">
-                  <img src="assets/logoAssimilacao.webp" alt="Assimilação RPG Logo" style="width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #eab308; box-shadow: 0 0 10px rgba(234, 179, 8, 0.45); object-fit: cover; animation: pulse 2s infinite alternate;">
-                  <div class="back-text">Destino</div>
-                </div>
-                <!-- Front (face up) -->
-                <div class="tarot-card-face tarot-card-front ${type}">
-                  <span class="card-suit-symbol">${symbol}</span>
-                  <span class="card-name-title">${item.cardData.nome}</span>
-                  <span class="card-type-tag">${type}</span>
+      <div style="width: 100%; margin-top: 10px;">
+  ${["evolutivas", "adaptativas", "inoportunas", "singulares"].map(cat => {
+    const catCards = state.drawnMutationCards.map((item, idx) => ({item, idx})).filter(o => o.item.category === cat);
+    if (catCards.length === 0) return "";
+    
+    let title = "Evolutivas";
+    let color = "#00ff66";
+    if (cat === "adaptativas") { title = "Adaptativas"; color = "#eab308"; }
+    if (cat === "inoportunas") { title = "Inoportunas"; color = "#ef4444"; }
+    if (cat === "singulares") { title = "Singulares"; color = "#a855f7"; }
+    
+    return `
+      <div class="tarot-carousel-group">
+        <div class="tarot-carousel-title" style="color: ${color}; border-color: ${color}40;">${title}</div>
+        <div class="tarot-spread">
+          ${catCards.map(({item, idx}) => {
+            const type = item.category;
+            const isFlipped = item.flipped;
+            const isSelected = state.activeCardIndex === idx;
+            const symbol = type === "evolutivas" ? "♥" : type === "adaptativas" ? "♦" : type === "inoportunas" ? "♠" : "♣";
+            return `
+              <div class="tarot-card-wrapper" data-index="${idx}">
+                <div class="tarot-card ${isFlipped ? 'flipped' : ''} ${isSelected ? 'active-selection' : ''}">
+                  <div class="tarot-card-face tarot-card-back">
+                    <img src="assets/logoAssimilacao.webp" alt="Assimilação RPG Logo" style="width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid #eab308; box-shadow: 0 0 10px rgba(234, 179, 8, 0.45); object-fit: cover; animation: pulse 2s infinite alternate;">
+                    <div class="back-text">Destino</div>
+                  </div>
+                  <div class="tarot-card-face tarot-card-front ${type}">
+                    <span class="card-suit-symbol">${symbol}</span>
+                    <span class="card-name-title">${item.cardData.nome}</span>
+                    <span class="card-type-tag">${type}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          `;
-        }).join("")}
+            `;
+          }).join("")}
+        </div>
       </div>
+    `;
+  }).join("")}
+</div>
 
       <div class="tarot-details-panel" id="tarot-details-panel">
         <div style="text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 30px;">
