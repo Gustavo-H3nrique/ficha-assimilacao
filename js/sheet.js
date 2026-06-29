@@ -170,7 +170,7 @@ export function renderHealthSheet() {
   { key: "4", name: "4. Laceração", desc: "Penalidade de -1 SUCESSO em todos os testes" },
   { key: "3", name: "3. Ferimentos", desc: "Penalidade de -1 SUCESSO em todos os testes" },
   { key: "2", name: "2. Debilitação", desc: "Penalidade de -2 SUCESSO. Incapaz de agir sem gastar 1 Determinação" },
-  { key: "1", name: "1. Incapacitação", desc: "Coma. Gasta 1 Determinação/rodada para agir. Ação: Gasta 2 ADAPTACAO" }
+  { key: "1", name: "1. Incapacitação", desc: "Coma. Gasta 1 Determinação para se manter consciente e falar. Ação: Gasta 2 ADAPTACOES" }
 ];
   
   if (!char.dano) {
