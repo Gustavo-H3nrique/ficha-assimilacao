@@ -614,17 +614,28 @@ export function initRolagemAssimiladaPanel() {
   if (!select1 || !select2) return;
 
   const optionsHtml = INSTINTOS.map(i =>
-    `<option value="${i}">${i} (${char.instintos[i] || 0})</option>`
-  ).join("");
+  `<option value="${i}">${i} (${char.instintos[i] || 0})</option>`
+).join("");
 
-  select1.innerHTML = optionsHtml;
-  select2.innerHTML = optionsHtml;
+// Salva seleções atuais antes de recriar
+const prevVal1 = select1.value;
+const prevVal2 = select2.value;
 
-  // Seleciona o instinto padrão se houver
-  const preInstinto = state.selectedRoll.instinto;
-  if (preInstinto && INSTINTOS.includes(preInstinto)) {
-    select1.value = preInstinto;
-  }
+select1.innerHTML = optionsHtml;
+select2.innerHTML = optionsHtml;
+
+// Restaura seleção do 2º instinto se já havia uma escolha
+if (prevVal2 && INSTINTOS.includes(prevVal2)) {
+  select2.value = prevVal2;
+}
+
+// Prioriza seleção do 1º: se veio da ficha, usa ela; senão restaura o que estava
+const preInstinto = state.selectedRoll.instinto;
+if (preInstinto && INSTINTOS.includes(preInstinto)) {
+  select1.value = preInstinto;
+} else if (prevVal1 && INSTINTOS.includes(prevVal1)) {
+  select1.value = prevVal1;
+}
 
   const podeAssimilacao = char.assPoints >= 1;
   const podeDeterminacao = char.detPoints >= 2;
